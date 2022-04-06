@@ -4,59 +4,55 @@ env:
     MIROR_URL: ""
     EXECUTABLES: chocolatine
 on:
-  pull-request:
-    branches-ignore:
-      - 'ga-ignore_*'
   push:
     branches-ignore:
       - 'ga-ignore-*'
 
 jobs:
   check_repository_cleanliness:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
       - uses: actions/checkout@v2
-        whith:
+        with:
           fetch-depth: 0
-      -run: find -name '#*#' -o -name '*-' -o -name '*pain_au_chocolat*' -o -name '*.a' -o -name '*.o' -o -name '*.gcno' -o -name '*.gcda' -o -name '*.gcov'
+      - run: find -name '#*#' -o -name '*-' -o -name '*pain_au_chocolat*' -o -name '*.a' -o -name '*.o' -o -name '*.gcno' -o -name '*.gcda' -o -name '*.gcov'
 
   check_program_compilation:
     needs:
       - check_repository_cleanliness
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
       - uses: actions/checkout@v2
-        whith:
+        with:
           fetch-depth: 0
       - run: make
         timeout-minutes: 2
       - run: make clean
       - run: for FILE in $EXECUTABLES; do test -f $FILE && echo '$FILE exist' ; done
   run_tests:
-    need:
+    needs:
       - check_program_compilation
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
       - uses: actions/checkout@v2
-        whith:
+        with:
           fetch-depth: 0
       - run: make tests_run
         timeout-minutes: 2
 
   push_to_mirror:
-    need:
+    needs:
       - run_tests
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
       - uses: actions/checkout@v2
-        whith:
+        with:
           fetch-depth: 0
-    run:

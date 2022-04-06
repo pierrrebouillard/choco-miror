@@ -5,7 +5,8 @@
 ## tsk01
 ##
 
-SRC	= 	main.c 					\
+SRC	= 	main.c 		\
+		test.c
 
 
 OBJ     =       $(SRC:.c=.o)

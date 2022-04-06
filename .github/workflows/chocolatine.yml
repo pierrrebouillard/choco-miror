@@ -1,7 +1,7 @@
 name: Chocolatine
 
 env:
-    MIROR_URL: ""
+    MIROR_URL: "https://github.com/EpitechPromo2026/B-DOP-200-BDX-2-1-chocolatine-pierre.bouillard.git"
     EXECUTABLES: chocolatine
 on:
   push:
@@ -62,9 +62,10 @@ jobs:
     needs:
       - run_tests
     runs-on: ubuntu-latest
-    container:
-      image: epitechcontent/epitest-docker:latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: pixta-dev/repository-mirroring-action@v1
         with:
-          fetch-depth: 0
+          target_repo_url:
+            ${{ env.MIRROR_URL }}
+          ssh_private_key:
+            ${{ secrets.PRIVATE_KEY }}

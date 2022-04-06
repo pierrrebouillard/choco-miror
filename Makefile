@@ -18,10 +18,10 @@ CPPFLAGS	+=	-I include/
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	gcc -o $(NAME) $(SRC) $(CFLAGS) $(CPPFLAGS)
+	gcc -o $(NAME) $(OBJ) $(CFLAGS) $(CPPFLAGS)
 
 tests_run:
-	gcc -o $(NAME) $(OBJ) -lcriterion --coverage
+	gcc -o $(NAME) $(SRC) -lcriterion --coverage
 
 clean:
 	rm -f $(OBJ)

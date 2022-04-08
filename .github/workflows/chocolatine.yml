@@ -27,8 +27,7 @@ jobs:
           done
           if [[ -n $UNWANTED_FILES ]]
           then
-            echo Unwanted files detected : $UNWANTEDFILES
-            exit 1
+            exit Unwanted files detected : $UNWANTEDFILES
           else
             echo No unwanted files detected
           fi

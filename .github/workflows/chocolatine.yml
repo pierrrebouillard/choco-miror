@@ -22,7 +22,8 @@ jobs:
         with:
           fetch-depth: 0
       - run: |
-          UNWANTED_FILES=$(find . -type f -not -path "./git/*" -wholename "*tmp/*" -or -name "*~" -or -name "*.o" -or -name "*.so" -or -name "*.gcno" -or -name "*.gdca" -or -name "*.gcov" -or -name "*pain_au_chocolat*")
+          UNWANTED_FILES=$(find . -type f -not -path "./git/*" -wholename "*tmp/*" -or -name "*~"
+           -or -name "*.o" -or -name "*.so" -or -name "*.gcno" -or -name "*.gdca" -or -name "*.gcov" -or -name "*pain_au_chocolat*")
           for FILES in $UNWANTED_FILES; do
             echo "::error file=${FILE#./}, title=Unwanted file detected::${FILE#./}"
           done
@@ -71,3 +72,5 @@ jobs:
         with:
           target_repo_url:
             ${{ env.MIROR_URL }}
+          ssh_private_key:
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}

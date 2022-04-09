@@ -71,5 +71,3 @@ jobs:
         with:
           target_repo_url:
             ${{ env.MIROR_URL }}
-          ssh_private_key:
-            ${{ secrets.GIT_SSH_PRIVATE_KEY }}

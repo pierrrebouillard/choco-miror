@@ -1,7 +1,7 @@
 name: Chocolatine
 
 env:
-  MIROR_URL: "https://github.com/pierrrebouillard/choco-miror"
+  MIROR_URL: "git@github.com:pierrrebouillard/choco-miror.git"
   EXECUTABLES: chocolatine
 
 on:
